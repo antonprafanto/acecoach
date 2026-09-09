@@ -49,8 +49,8 @@
 
 - [x] **3.1 Kuis Diagnostik Level NTRP (5 Pertanyaan):**
   - Evaluasi mandiri durasi bermain, konsistensi reli, teknik servis, kontrol arah, dan pengalaman matchplay untuk menempatkan pengguna di jalur Pemula (1.0-2.5) atau Menengah (3.0-4.5).
-- [x] **3.2 Ambidextrous Mode (Pemain Kidal / Southpaw):**
-  - Toggle global yang secara reaktif membalik teks panduan kaki/tangan dan membalik seluruh grafis SVG anatomi secara horizontal (`scaleX(-1)`).
+- [x] **3.2 Universal Standard Orientation (Disederhanakan):**
+  - Standarisasi orientasi tangan kanan universal untuk konsistensi gambar ilustrasi 3D tanpa distorsi pembalikan teks/gambar, menyederhanakan UI header, dengan catatan kaki adaptif ringkas untuk pemain kidal.
 - [x] **3.3 Pilihan Gaya Backhand:** Pemilihan *Two-Handed (2HBH)* vs *One-Handed (1HBH)* untuk memfilter materi kurikulum dan drill yang relevan.
 - [x] **3.4 Outdoor Sunlight Mode Toggle:** Pilihan instan tema *Dark Court* vs *Sunlight High-Contrast* di navbar utama.
 
@@ -99,7 +99,7 @@
   - Diagram Pronasi Servis rotasi internal 90°.
   - Diagram Geometri Lapangan (keunggulan 70% pukulan crosscourt).
   - Diagram Index Finger Rule pada raket grip sizing di Prehab.
-  - Dukungan cermin horizontal (`scaleX(-1)`) instan saat mode Kidal aktif.
+  - Desain visual bersih dan konsisten dengan perspektif standar industri tenis.
 
 ---
 

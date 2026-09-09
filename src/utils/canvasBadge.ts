@@ -93,7 +93,7 @@ export const generateWorkoutBadge = (
     // 6. User Level & Milestone
     ctx.fillStyle = '#FFFFFF';
     ctx.font = 'bold 24px Inter, sans-serif';
-    ctx.fillText(`Pemain: NTRP ${profile.ntrpLevel} • ${profile.handDominance === 'left' ? 'Kidal (Lefty)' : 'Right-Handed'}`, 90, 580);
+    ctx.fillText(`Pemain: Level NTRP ${profile.ntrpLevel}`, 90, 580);
     ctx.fillStyle = '#94A3B8';
     ctx.font = '18px Inter, sans-serif';
     ctx.fillText(`Kurikulum Dikuasai: ${completedLessonCount} Modul Latihan`, 90, 615);

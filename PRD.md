@@ -115,7 +115,7 @@ $$\text{Shadow Swings (No Ball)} \rightarrow \text{Self/Hand Feed} \rightarrow \
 
 ### Modul 2: Progressive Pathway Curriculum (Kurikulum Terstruktur)
 
-Tiap latihan dilengkapi tag sarana: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder / Ball Machine]`, `[Live Rally]`, serta **Diagram Kinematik Vektor SVG Interaktif** (`LessonIllustration.tsx`) yang dapat di-expand dengan dukungan otomatis cermin horizontal (`scaleX(-1)`) untuk pemain kidal (Southpaw).
+Tiap latihan dilengkapi tag sarana: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder / Ball Machine]`, `[Live Rally]`, serta **Diagram Kinematik Vektor SVG Interaktif** (`LessonIllustration.tsx`) yang dapat di-expand dengan perspektif standar industri tenis universal.
 
 #### Jalur Pemula: 4-Week Foundation Track
 * **Minggu 1: Fondasi Pegangan & Titik Kontak (Grip & Contact Point)**
@@ -156,8 +156,8 @@ Tiap latihan dilengkapi tag sarana: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feede
 1. **Interactive Checkpoint Viewer:**
    * Mengurai 4 fase pukulan: *Unit Turn / Preparation* $\rightarrow$ *Drop & Lag* $\rightarrow$ *Contact Point* $\rightarrow$ *Follow-through & Recovery*.
    * Toggle **"Mitos Klasik vs Realita Modern"**.
-2. **Ambidextrous (Mirror) Rendering:**
-   * Mode kidal membalik seluruh anatomi dan posisi raket secara visual otomatis.
+2. **Universal Standard Rendering:**
+   * Standar sudut pandang industri tenis universal (tangan kanan) agar konsisten dengan aset grafis realistis 3D/foto tanpa distorsi pembalikan teks. Catatan panduan adaptif disediakan bagi pemain kidal.
 3. **In-App Camera Mirror (Feel vs. Real):**
    * Kamera selfie real-time dengan garis panduan bantu (*grid overlay*).
 

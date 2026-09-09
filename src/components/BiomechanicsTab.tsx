@@ -31,7 +31,6 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
   const streamRef = useRef<MediaStream | null>(null);
 
   const activePhase = BIOMECHANICS_PHASES[selectedPhaseIndex];
-  const isLefty = profile.handDominance === 'left';
 
   const startCamera = async () => {
     setCameraError(null);
@@ -78,13 +77,10 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
     return (
       <div className="bg-tennis-navy/70 border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
         <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider mb-2">
-          Diagram Kinematik {isLefty ? '(Perspektif Kidal)' : '(Perspektif Kanan)'}
+          Diagram Kinematik 4-Fase
         </span>
 
-        <div
-          className="w-full max-w-[240px] aspect-[4/3] flex items-center justify-center transition-transform duration-300"
-          style={{ transform: isLefty ? 'scaleX(-1)' : 'none' }}
-        >
+        <div className="w-full max-w-[240px] aspect-[4/3] flex items-center justify-center">
           {selectedPhaseIndex === 0 && (
             // Phase 1: Unit Turn (Shoulder 90, Hip 45)
             <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
@@ -160,19 +156,19 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Top Banner with Hand Dominance status */}
+      {/* Top Banner */}
       <div className="bg-tennis-surface border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
         <div>
           <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider block">
             Anatomi Biomekanik Modern
           </span>
           <h2 className="text-lg font-bold text-white">
-            Membedah Rantai Kinetik {isLefty ? '(Mode Kidal 🎾)' : '(Right-Handed ✋)'}
+            Membedah Rantai Kinetik Modern
           </h2>
         </div>
         <div className="text-right">
           <span className="text-xs bg-tennis-navy border border-slate-700 px-2.5 py-1 rounded-lg text-slate-300 font-semibold">
-            {isLefty ? 'Perspective Mirrored' : 'Standard Perspective'}
+            Universal Standard
           </span>
         </div>
       </div>
@@ -216,13 +212,16 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
 
         <p className="text-xs text-slate-300 leading-relaxed">{activePhase.description}</p>
 
-        {/* Adaptive Key Cue for Righty vs Lefty */}
+        {/* Adaptive Key Cue */}
         <div className="bg-tennis-navy/60 border border-tennis-yellow/30 p-3.5 rounded-xl">
           <span className="text-xs font-bold text-tennis-yellow flex items-center gap-1.5 mb-1">
-            <Zap className="w-4 h-4" /> Kunci Tindakan Biomekanik ({isLefty ? 'Tangan Kiri' : 'Tangan Kanan'}):
+            <Zap className="w-4 h-4" /> Kunci Tindakan Biomekanik:
           </span>
           <p className="text-xs text-slate-200 leading-relaxed font-medium">
-            {isLefty ? activePhase.keyActionLefty : activePhase.keyActionRighty}
+            {activePhase.keyActionRighty}
+          </p>
+          <p className="text-[10px] text-slate-400 mt-1.5 italic">
+            *Catatan: Bagi pemain kidal, gunakan arah dan lengan sebaliknya ({activePhase.keyActionLefty}).
           </p>
         </div>
 

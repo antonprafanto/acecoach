@@ -50,23 +50,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="font-bold">NTRP {profile.ntrpLevel}</span>
           </button>
 
-          {/* Hand Dominance Toggle: Kidal (Left) vs Kanan (Right) */}
-          <button
-            onClick={() =>
-              onUpdateProfile({
-                handDominance: profile.handDominance === 'right' ? 'left' : 'right',
-              })
-            }
-            title={profile.handDominance === 'left' ? 'Mode Kidal Aktif' : 'Mode Tangan Kanan'}
-            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold border transition-colors flex items-center gap-1 ${
-              profile.handDominance === 'left'
-                ? 'bg-tennis-clay/20 border-tennis-clay text-tennis-clay'
-                : 'bg-tennis-surface border-slate-700 text-slate-300 hover:border-slate-500'
-            }`}
-          >
-            <span>{profile.handDominance === 'left' ? '🎾 Kidal' : '✋ Kanan'}</span>
-          </button>
-
           {/* Screen Wake Lock Toggle */}
           <button
             onClick={onToggleWakeLock}

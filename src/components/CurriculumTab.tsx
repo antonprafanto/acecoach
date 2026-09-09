@@ -275,7 +275,7 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-slate-800/80 space-y-3 text-xs">
                       {/* Interactive Visual Kinematic Illustration */}
-                      <LessonIllustration lessonId={lesson.id} isLefty={profile.handDominance === 'left'} />
+                      <LessonIllustration lessonId={lesson.id} />
 
                       <div className="bg-tennis-navy/40 p-3 rounded-xl border border-slate-800">
                         <span className="font-bold text-tennis-yellow block mb-1">

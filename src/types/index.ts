@@ -8,7 +8,7 @@ export type DrillContext = 'Solo Shadow' | 'Wall / Dinding' | 'Feeder' | 'Live R
 
 export interface UserProfile {
   version: string;
-  handDominance: HandDominance;
+  handDominance?: HandDominance;
   backhandStyle: BackhandStyle;
   ntrpLevel: NTRPLevel;
   courtSurface: CourtSurface;
