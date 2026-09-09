@@ -21,29 +21,29 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-tennis-navy/95 backdrop-blur border-b border-slate-800 px-4 py-3">
-      <div className="max-w-4xl mx-auto flex items-center justify-between">
+      <div className="max-w-4xl mx-auto flex items-center justify-between gap-2">
         {/* Brand */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-tennis-yellow/10 border border-tennis-yellow flex items-center justify-center court-glow-yellow">
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-tennis-yellow/10 border border-tennis-yellow flex items-center justify-center court-glow-yellow shrink-0">
             <Flame className="w-5 h-5 text-tennis-yellow" />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <h1 className="text-xl font-bold tracking-tight text-white">
+              <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white shrink-0">
                 Ace<span className="text-tennis-yellow">Coach</span>
               </h1>
-              <span className="text-[10px] uppercase font-bold tracking-widest bg-tennis-yellow/15 text-tennis-yellow px-1.5 py-0.5 rounded border border-tennis-yellow/30">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest bg-tennis-yellow/15 text-tennis-yellow px-1.5 py-0.5 rounded border border-tennis-yellow/30 shrink-0">
                 PTR v1.2
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium">
+            <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate">
               Modern Tennis Biomechanics <span className="text-slate-500">• by Anton Prafanto</span>
             </p>
           </div>
         </div>
 
         {/* Quick Action Toggles */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* User Guide Button */}
           <button
             onClick={onOpenGuide}
