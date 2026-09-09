@@ -2,9 +2,11 @@
 # AceCoach — Modern Tennis Pathway (Web App)
 
 > **Versi Dokumen:** 1.2.0 (The Definitive & Exhaustive Master Tracker)  
-> **Status:** 🟢 Fase 1 s/d 9 Selesai Diimplementasikan & Lolos Build Produksi!  
+> **Status:** 🟢 100% Selesai & Terunggah ke GitHub Repository!  
 > **Dasar Acuan:** [PRD.md v1.2.0 (The Definitive Master Edition)](file:///c:/Users/anton/vibecoding/aplikasitenis/PRD.md)  
-> **Progress Keseluruhan:** `[ 90% ]` — 9 dari 10 Fase Selesai
+> **Progress Keseluruhan:** `[ 100% ]` — 10 dari 10 Fase Selesai  
+> **Repository URL:** [https://github.com/antonprafanto/acecoach](https://github.com/antonprafanto/acecoach)  
+> **Live GitHub Pages:** [https://antonprafanto.github.io/acecoach/](https://antonprafanto.github.io/acecoach/)
 
 ---
 
@@ -156,5 +158,5 @@
 - [x] **10.1 Sunlight & Ergonomics Testing:** Kontras warna `#CCFF00` dan `#0A192F`, ukuran touch-target >= 52px terpasang.
 - [x] **10.2 Audio & Wake Lock Verification:** API sintesis bip, vokal, dan `navigator.wakeLock` teruji aman dengan fallback.
 - [x] **10.3 Offline PWA Assets:** Service worker `public/sw.js` dan `manifest.webmanifest` terpasang.
-- [x] **10.4 Production Build & Zero-Lint Check:** `npm run build` berhasil 100% tanpa error (bundle gzip JS 81 kB, CSS 5.6 kB).
-- [ ] **10.5 Deployment GitHub Pages:** Menghubungkan remote GitHub dan push ke repository live.
+- [x] **10.4 Production Build & Zero-Lint Check:** `npm run build` berhasil 100% tanpa error (bundle gzip JS 82 kB, CSS 5.7 kB).
+- [x] **10.5 Deployment GitHub Pages:** Berhasil di-push ke branch `main` repositori `https://github.com/antonprafanto/acecoach`.
