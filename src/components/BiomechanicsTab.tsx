@@ -73,6 +73,91 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
     };
   }, []);
 
+  // Visual SVG Kinematic Diagrams based on phase
+  const renderPhaseKinematicDiagram = () => {
+    return (
+      <div className="bg-tennis-navy/70 border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
+        <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider mb-2">
+          Diagram Kinematik {isLefty ? '(Perspektif Kidal)' : '(Perspektif Kanan)'}
+        </span>
+
+        <div
+          className="w-full max-w-[240px] aspect-[4/3] flex items-center justify-center transition-transform duration-300"
+          style={{ transform: isLefty ? 'scaleX(-1)' : 'none' }}
+        >
+          {selectedPhaseIndex === 0 && (
+            // Phase 1: Unit Turn (Shoulder 90, Hip 45)
+            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+              {/* Torso Top View / Angle */}
+              <ellipse cx="100" cy="80" rx="35" ry="18" fill="#1E293B" stroke="#CCFF00" strokeWidth="2.5" />
+              <circle cx="100" cy="50" r="16" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+              {/* Left Arm Guiding Racket */}
+              <path d="M 70 80 Q 95 105 130 95" fill="none" stroke="#60A5FA" strokeWidth="3.5" strokeLinecap="round" />
+              {/* Right Arm & Racket Coiled */}
+              <path d="M 130 80 Q 145 75 160 55" fill="none" stroke="#CCFF00" strokeWidth="4" strokeLinecap="round" />
+              {/* Racket Head */}
+              <ellipse cx="165" cy="45" rx="14" ry="22" transform="rotate(30 165 45)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+              {/* Rotation Arrow */}
+              <path d="M 55 55 A 40 40 0 0 1 125 35" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeDasharray="3,3" markerEnd="url(#arrow)" />
+              <text x="100" y="145" fill="#94A3B8" fontSize="10" textAnchor="middle">Bahu Berputar 90° • Pinggul 45°</text>
+            </svg>
+          )}
+
+          {selectedPhaseIndex === 1 && (
+            // Phase 2: The Drop & Lag (Racket below ball, 90 deg angle)
+            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+              {/* Player Body Silhouette */}
+              <circle cx="80" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+              <line x1="80" y1="60" x2="80" y2="110" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+              {/* Arm reaching forward, Racket lagging behind */}
+              <path d="M 80 75 L 115 85 L 120 115" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+              {/* Racket Head Dropped Low */}
+              <line x1="120" y1="115" x2="160" y2="125" stroke="#CCFF00" strokeWidth="3.5" />
+              <ellipse cx="170" cy="128" rx="18" ry="12" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+              {/* 90 Deg Lag Indicator */}
+              <path d="M 125 95 Q 135 105 130 118" fill="none" stroke="#F43F5E" strokeWidth="2" strokeDasharray="2,2" />
+              <text x="140" y="105" fill="#F43F5E" fontSize="9" fontWeight="bold">Lag 90°</text>
+              <text x="100" y="150" fill="#94A3B8" fontSize="10" textAnchor="middle">Racket Head di Bawah Bola</text>
+            </svg>
+          )}
+
+          {selectedPhaseIndex === 2 && (
+            // Phase 3: Contact Point (In Front of Body)
+            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+              <circle cx="70" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+              <line x1="70" y1="60" x2="70" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+              {/* Arm Extended Out Front */}
+              <path d="M 70 70 L 110 75 L 135 70" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+              {/* Racket Vertical at Contact */}
+              <line x1="135" y1="70" x2="150" y2="70" stroke="#CCFF00" strokeWidth="3.5" />
+              <ellipse cx="150" cy="70" rx="8" ry="24" fill="rgba(204,255,0,0.25)" stroke="#CCFF00" strokeWidth="2.5" />
+              {/* Tennis Ball Impact */}
+              <circle cx="158" cy="70" r="7" fill="#CCFF00" stroke="#A3CC00" strokeWidth="1.5" />
+              {/* Distance Bracket */}
+              <line x1="70" y1="125" x2="150" y2="125" stroke="#F59E0B" strokeWidth="1.5" strokeDasharray="3,3" />
+              <text x="110" y="140" fill="#F59E0B" fontSize="9" fontWeight="bold" textAnchor="middle">35 cm di Depan Pinggul</text>
+            </svg>
+          )}
+
+          {selectedPhaseIndex === 3 && (
+            // Phase 4: Follow-Through & Wiper Finish
+            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+              <circle cx="100" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+              <line x1="100" y1="60" x2="100" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+              {/* High Elbow & Wiper Wrap */}
+              <path d="M 100 70 L 125 60 L 85 55" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+              {/* Racket Across Opposite Shoulder */}
+              <ellipse cx="65" cy="55" rx="14" ry="22" transform="rotate(-40 65 55)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+              {/* Arc of Wiper */}
+              <path d="M 140 100 Q 155 50 75 40" fill="none" stroke="#10B981" strokeWidth="2.5" strokeDasharray="3,3" />
+              <text x="100" y="148" fill="#10B981" fontSize="10" fontWeight="bold" textAnchor="middle">Windshield Wiper Finish • Siku Tinggi</text>
+            </svg>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6 pb-20">
       {/* Top Banner with Hand Dominance status */}
@@ -111,6 +196,9 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
           </button>
         ))}
       </div>
+
+      {/* Interactive Visual Kinematic SVG Diagram */}
+      {renderPhaseKinematicDiagram()}
 
       {/* Checkpoint Detail Card */}
       <div className="bg-tennis-surface border border-slate-800 rounded-2xl p-5 space-y-4">
