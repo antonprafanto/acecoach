@@ -10,6 +10,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Zap,
+  Smartphone,
 } from 'lucide-react';
 
 interface UserGuideModalProps {
@@ -190,6 +191,17 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ onClose, onNavig
             <div>
               <strong className="font-semibold text-amber-300">Tips Lapangan: </strong>
               <span>{currentStep.proTip}</span>
+            </div>
+          </div>
+
+          {/* PWA Home Screen Install Tip */}
+          <div className="flex items-start gap-2.5 p-3 rounded-xl bg-blue-950/30 border border-blue-600/30 text-xs text-blue-200">
+            <Smartphone className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <strong className="font-semibold text-blue-300 block">📲 Pasang di Layar Utama HP:</strong>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Ingin layar penuh seperti aplikasi Play Store? Di <strong>Chrome Android</strong> tekan ⋮ lalu <em>"Tambahkan ke Layar Utama"</em>. Di <strong>Safari iPhone</strong> tekan tombol Bagikan ⎋ lalu <em>"Add to Home Screen"</em>.
+              </p>
             </div>
           </div>
 
