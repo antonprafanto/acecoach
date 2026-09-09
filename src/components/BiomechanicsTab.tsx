@@ -10,7 +10,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   ArrowRight,
-  Maximize2
+  Maximize2,
+  X
 } from 'lucide-react';
 import { BIOMECHANICS_PHASES } from '../data/biomechanicsData';
 import { UserProfile, BiomechanicsPhase } from '../types';
@@ -35,22 +36,34 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
   const startCamera = async () => {
     setCameraError(null);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: 'user',
-          width: { ideal: 640 },
-          height: { ideal: 480 }
-        },
-        audio: false
-      });
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: 'user',
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          },
+          audio: false
+        });
+      } catch {
+        // Fallback for laptops/webcams where facingMode 'user' might not be supported
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false
+        });
+      }
+
       streamRef.current = stream;
+      setIsCameraActive(true);
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.play().catch((err) => console.warn('Camera play warning:', err));
       }
-      setIsCameraActive(true);
     } catch (err: any) {
       console.warn('Camera error:', err);
-      setCameraError('Izin kamera ditolak atau kamera tidak terdeteksi pada perangkat ini.');
+      setCameraError('Izin kamera ditolak atau kamera tidak terdeteksi pada perangkat ini. Pastikan izin kamera telah diizinkan di browser.');
       setIsCameraActive(false);
     }
   };
@@ -66,90 +79,145 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
     setIsCameraActive(false);
   };
 
+  // Sync stream to video element whenever camera is toggled or element mounts
+  useEffect(() => {
+    if (isCameraActive && streamRef.current && videoRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      videoRef.current.play().catch((err) => console.warn('Video autoPlay warning:', err));
+    }
+  }, [isCameraActive]);
+
   useEffect(() => {
     return () => {
       stopCamera();
     };
   }, []);
 
-  // Visual SVG Kinematic Diagrams based on phase
+  const [isPhaseZoomed, setIsPhaseZoomed] = useState<boolean>(false);
+  const [phaseImageErrors, setPhaseImageErrors] = useState<Record<number, boolean>>({});
+
+  const phaseImage = {
+    0: {
+      src: './illustrations/biomechanics_phase_1_unit_turn.jpg',
+      title: 'Fase 1: Unit Turn & Coiling',
+      caption: 'Bahu Berputar 90° • Pinggul 45°'
+    },
+    1: {
+      src: './illustrations/biomechanics_phase_2_drop_lag.jpg',
+      title: 'Fase 2: The Drop & Racket Lag',
+      caption: 'Racket Head di Bawah Bola • Lag 90°'
+    },
+    2: {
+      src: './illustrations/biomechanics_phase_3_contact.jpg',
+      title: 'Fase 3: The Contact Point',
+      caption: 'Titik Bentur 30–45 cm di Depan Pinggul'
+    },
+    3: {
+      src: './illustrations/biomechanics_phase_4_finish.jpg',
+      title: 'Fase 4: Extension & Wiper Finish',
+      caption: 'Windshield Wiper Finish • Siku Setinggi Bahu'
+    }
+  }[selectedPhaseIndex];
+
+  // Visual 3D Biomechanics Diagram with SVG Fallback
   const renderPhaseKinematicDiagram = () => {
+    const hasImage = phaseImage && !phaseImageErrors[selectedPhaseIndex];
+
     return (
-      <div className="bg-tennis-navy/70 border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
-        <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider mb-2">
-          Diagram Kinematik 4-Fase
-        </span>
-
-        <div className="w-full max-w-[240px] aspect-[4/3] flex items-center justify-center">
-          {selectedPhaseIndex === 0 && (
-            // Phase 1: Unit Turn (Shoulder 90, Hip 45)
-            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
-              {/* Torso Top View / Angle */}
-              <ellipse cx="100" cy="80" rx="35" ry="18" fill="#1E293B" stroke="#CCFF00" strokeWidth="2.5" />
-              <circle cx="100" cy="50" r="16" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
-              {/* Left Arm Guiding Racket */}
-              <path d="M 70 80 Q 95 105 130 95" fill="none" stroke="#60A5FA" strokeWidth="3.5" strokeLinecap="round" />
-              {/* Right Arm & Racket Coiled */}
-              <path d="M 130 80 Q 145 75 160 55" fill="none" stroke="#CCFF00" strokeWidth="4" strokeLinecap="round" />
-              {/* Racket Head */}
-              <ellipse cx="165" cy="45" rx="14" ry="22" transform="rotate(30 165 45)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
-              {/* Rotation Arrow */}
-              <path d="M 55 55 A 40 40 0 0 1 125 35" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeDasharray="3,3" markerEnd="url(#arrow)" />
-              <text x="100" y="145" fill="#94A3B8" fontSize="10" textAnchor="middle">Bahu Berputar 90° • Pinggul 45°</text>
-            </svg>
-          )}
-
-          {selectedPhaseIndex === 1 && (
-            // Phase 2: The Drop & Lag (Racket below ball, 90 deg angle)
-            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
-              {/* Player Body Silhouette */}
-              <circle cx="80" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
-              <line x1="80" y1="60" x2="80" y2="110" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
-              {/* Arm reaching forward, Racket lagging behind */}
-              <path d="M 80 75 L 115 85 L 120 115" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
-              {/* Racket Head Dropped Low */}
-              <line x1="120" y1="115" x2="160" y2="125" stroke="#CCFF00" strokeWidth="3.5" />
-              <ellipse cx="170" cy="128" rx="18" ry="12" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
-              {/* 90 Deg Lag Indicator */}
-              <path d="M 125 95 Q 135 105 130 118" fill="none" stroke="#F43F5E" strokeWidth="2" strokeDasharray="2,2" />
-              <text x="140" y="105" fill="#F43F5E" fontSize="9" fontWeight="bold">Lag 90°</text>
-              <text x="100" y="150" fill="#94A3B8" fontSize="10" textAnchor="middle">Racket Head di Bawah Bola</text>
-            </svg>
-          )}
-
-          {selectedPhaseIndex === 2 && (
-            // Phase 3: Contact Point (In Front of Body)
-            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
-              <circle cx="70" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
-              <line x1="70" y1="60" x2="70" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
-              {/* Arm Extended Out Front */}
-              <path d="M 70 70 L 110 75 L 135 70" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
-              {/* Racket Vertical at Contact */}
-              <line x1="135" y1="70" x2="150" y2="70" stroke="#CCFF00" strokeWidth="3.5" />
-              <ellipse cx="150" cy="70" rx="8" ry="24" fill="rgba(204,255,0,0.25)" stroke="#CCFF00" strokeWidth="2.5" />
-              {/* Tennis Ball Impact */}
-              <circle cx="158" cy="70" r="7" fill="#CCFF00" stroke="#A3CC00" strokeWidth="1.5" />
-              {/* Distance Bracket */}
-              <line x1="70" y1="125" x2="150" y2="125" stroke="#F59E0B" strokeWidth="1.5" strokeDasharray="3,3" />
-              <text x="110" y="140" fill="#F59E0B" fontSize="9" fontWeight="bold" textAnchor="middle">35 cm di Depan Pinggul</text>
-            </svg>
-          )}
-
-          {selectedPhaseIndex === 3 && (
-            // Phase 4: Follow-Through & Wiper Finish
-            <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
-              <circle cx="100" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
-              <line x1="100" y1="60" x2="100" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
-              {/* High Elbow & Wiper Wrap */}
-              <path d="M 100 70 L 125 60 L 85 55" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
-              {/* Racket Across Opposite Shoulder */}
-              <ellipse cx="65" cy="55" rx="14" ry="22" transform="rotate(-40 65 55)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
-              {/* Arc of Wiper */}
-              <path d="M 140 100 Q 155 50 75 40" fill="none" stroke="#10B981" strokeWidth="2.5" strokeDasharray="3,3" />
-              <text x="100" y="148" fill="#10B981" fontSize="10" fontWeight="bold" textAnchor="middle">Windshield Wiper Finish • Siku Tinggi</text>
-            </svg>
+      <div className="bg-tennis-navy/70 border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden shadow-lg">
+        <div className="w-full flex items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-700/80">
+          <div className="flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-tennis-yellow shrink-0" />
+            <span className="text-[11px] font-bold text-tennis-yellow tracking-wide">
+              {phaseImage ? `${phaseImage.title}: ${phaseImage.caption}` : 'Diagram Kinematik 4-Fase'}
+            </span>
+          </div>
+          {hasImage && (
+            <button
+              onClick={() => setIsPhaseZoomed(true)}
+              className="p-1 rounded-md bg-slate-800/80 text-slate-300 hover:text-tennis-yellow hover:bg-slate-700 transition-colors flex items-center gap-1 text-[10px] px-2"
+            >
+              <Maximize2 className="w-3 h-3" />
+              <span>Zoom</span>
+            </button>
           )}
         </div>
+
+        {hasImage ? (
+          <div
+            onClick={() => setIsPhaseZoomed(true)}
+            className="relative w-full max-w-lg aspect-video rounded-xl overflow-hidden cursor-pointer group bg-black/40 border border-slate-800 flex items-center justify-center"
+          >
+            <img
+              src={phaseImage.src}
+              alt={phaseImage.title}
+              onError={() =>
+                setPhaseImageErrors((prev) => ({ ...prev, [selectedPhaseIndex]: true }))
+              }
+              className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-2">
+              <span className="text-[11px] bg-tennis-dark/90 border border-tennis-yellow/50 text-tennis-yellow px-2.5 py-1 rounded-full font-semibold shadow flex items-center gap-1">
+                <Maximize2 className="w-3 h-3" /> Klik untuk memperbesar
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full max-w-[240px] aspect-[4/3] flex items-center justify-center">
+            {selectedPhaseIndex === 0 && (
+              // Phase 1: Unit Turn (Shoulder 90, Hip 45)
+              <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+                <ellipse cx="100" cy="80" rx="35" ry="18" fill="#1E293B" stroke="#CCFF00" strokeWidth="2.5" />
+                <circle cx="100" cy="50" r="16" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+                <path d="M 70 80 Q 95 105 130 95" fill="none" stroke="#60A5FA" strokeWidth="3.5" strokeLinecap="round" />
+                <path d="M 130 80 Q 145 75 160 55" fill="none" stroke="#CCFF00" strokeWidth="4" strokeLinecap="round" />
+                <ellipse cx="165" cy="45" rx="14" ry="22" transform="rotate(30 165 45)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+                <path d="M 55 55 A 40 40 0 0 1 125 35" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeDasharray="3,3" markerEnd="url(#arrow)" />
+                <text x="100" y="145" fill="#94A3B8" fontSize="10" textAnchor="middle">Bahu Berputar 90° • Pinggul 45°</text>
+              </svg>
+            )}
+
+            {selectedPhaseIndex === 1 && (
+              // Phase 2: The Drop & Lag (Racket below ball, 90 deg angle)
+              <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+                <circle cx="80" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+                <line x1="80" y1="60" x2="80" y2="110" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 80 75 L 115 85 L 120 115" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+                <line x1="120" y1="115" x2="160" y2="125" stroke="#CCFF00" strokeWidth="3.5" />
+                <ellipse cx="170" cy="128" rx="18" ry="12" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+                <path d="M 125 95 Q 135 105 130 118" fill="none" stroke="#F43F5E" strokeWidth="2" strokeDasharray="2,2" />
+                <text x="140" y="105" fill="#F43F5E" fontSize="9" fontWeight="bold">Lag 90°</text>
+                <text x="100" y="150" fill="#94A3B8" fontSize="10" textAnchor="middle">Racket Head di Bawah Bola</text>
+              </svg>
+            )}
+
+            {selectedPhaseIndex === 2 && (
+              // Phase 3: Contact Point (In Front of Body)
+              <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+                <circle cx="70" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+                <line x1="70" y1="60" x2="70" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 70 70 L 110 75 L 135 70" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+                <line x1="135" y1="70" x2="150" y2="70" stroke="#CCFF00" strokeWidth="3.5" />
+                <ellipse cx="150" cy="70" rx="8" ry="24" fill="rgba(204,255,0,0.25)" stroke="#CCFF00" strokeWidth="2.5" />
+                <circle cx="158" cy="70" r="7" fill="#CCFF00" stroke="#A3CC00" strokeWidth="1.5" />
+                <line x1="70" y1="125" x2="150" y2="125" stroke="#F59E0B" strokeWidth="1.5" strokeDasharray="3,3" />
+                <text x="110" y="140" fill="#F59E0B" fontSize="9" fontWeight="bold" textAnchor="middle">35 cm di Depan Pinggul</text>
+              </svg>
+            )}
+
+            {selectedPhaseIndex === 3 && (
+              // Phase 4: Follow-Through & Wiper Finish
+              <svg viewBox="0 0 200 160" className="w-full h-full drop-shadow">
+                <circle cx="100" cy="45" r="15" fill="#334155" stroke="#FFFFFF" strokeWidth="2" />
+                <line x1="100" y1="60" x2="100" y2="115" stroke="#1E293B" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 100 70 L 125 60 L 85 55" fill="none" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+                <ellipse cx="65" cy="55" rx="14" ry="22" transform="rotate(-40 65 55)" fill="rgba(204,255,0,0.2)" stroke="#CCFF00" strokeWidth="2.5" />
+                <path d="M 140 100 Q 155 50 75 40" fill="none" stroke="#10B981" strokeWidth="2.5" strokeDasharray="3,3" />
+                <text x="100" y="148" fill="#10B981" fontSize="10" fontWeight="bold" textAnchor="middle">Windshield Wiper Finish • Siku Tinggi</text>
+              </svg>
+            )}
+          </div>
+        )}
       </div>
     );
   };
@@ -315,7 +383,18 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
         {isCameraActive ? (
           <div className="relative w-full aspect-[4/3] bg-black rounded-2xl overflow-hidden border border-slate-700 shadow-inner">
             <video
-              ref={videoRef}
+              ref={(el) => {
+                videoRef.current = el;
+                if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                  el.srcObject = streamRef.current;
+                  el.play().catch((e) => console.warn('Video stream error:', e));
+                }
+              }}
+              onCanPlay={() => {
+                if (videoRef.current && videoRef.current.paused) {
+                  videoRef.current.play().catch((e) => console.warn(e));
+                }
+              }}
               autoPlay
               playsInline
               muted
@@ -369,6 +448,50 @@ export const BiomechanicsTab: React.FC<BiomechanicsTabProps> = ({ profile }) => 
           </div>
         )}
       </div>
+
+      {/* Lightbox Zoom Modal for 3D Phase Image */}
+      {isPhaseZoomed && phaseImage && (
+        <div
+          onClick={() => setIsPhaseZoomed(false)}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl w-full max-h-[90vh] bg-tennis-dark border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+          >
+            {/* Modal Header */}
+            <div className="p-3.5 bg-tennis-surface border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider block">
+                  Visual Biomekanik 3D (Syari'at Compliant)
+                </span>
+                <h4 className="text-sm font-bold text-white">{phaseImage.title}</h4>
+              </div>
+              <button
+                onClick={() => setIsPhaseZoomed(false)}
+                className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Image */}
+            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/60 min-h-[300px]">
+              <img
+                src={phaseImage.src}
+                alt={phaseImage.title}
+                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-xl"
+              />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-3 bg-tennis-surface border-t border-slate-800 text-xs text-slate-300">
+              <span className="font-bold text-tennis-yellow block mb-0.5">🎯 Fokus Biomekanik:</span>
+              <p className="leading-relaxed">{activePhase.description}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
