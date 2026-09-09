@@ -152,21 +152,6 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
                   Menengah (6-Week)
                 </button>
               </div>
-
-              {/* Backhand Style Switcher for Intermediate */}
-              {activeLevel === 'intermediate' && (
-                <button
-                  onClick={() =>
-                    onUpdateProfile({
-                      backhandStyle:
-                        profile.backhandStyle === 'two_handed' ? 'one_handed' : 'two_handed',
-                    })
-                  }
-                  className="text-[11px] px-2.5 py-1 rounded bg-slate-800 text-tennis-yellow border border-slate-700 font-semibold"
-                >
-                  {profile.backhandStyle === 'two_handed' ? '🎾 2HBH' : '🎾 1HBH'}
-                </button>
-              )}
             </div>
 
             {/* Progress Bar */}
