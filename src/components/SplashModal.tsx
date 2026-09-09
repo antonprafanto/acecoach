@@ -1,24 +1,28 @@
 import React from 'react';
-import { Play, Volume2, Shield, Flame, CheckCircle2 } from 'lucide-react';
+import { Play, Flame, HelpCircle, BookOpen, Volume2, Camera } from 'lucide-react';
 import { unlockAudio } from '../utils/audioEngine';
 import { requestWakeLock } from '../utils/wakeLock';
 
 interface SplashModalProps {
   onEnterCourt: () => void;
+  onOpenGuide: () => void;
 }
 
-export const SplashModal: React.FC<SplashModalProps> = ({ onEnterCourt }) => {
-  const handleStart = async () => {
-    // Unlock iOS audio context on touch
+export const SplashModal: React.FC<SplashModalProps> = ({ onEnterCourt, onOpenGuide }) => {
+  const handleStart = async (openGuideAfter = false) => {
+    // Unlock iOS/Android audio context on user touch
     await unlockAudio();
     // Attempt to activate screen wake lock
     await requestWakeLock();
     onEnterCourt();
+    if (openGuideAfter) {
+      onOpenGuide();
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 bg-tennis-dark/95 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-tennis-surface border border-slate-800 max-w-sm w-full rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden">
+      <div className="bg-tennis-surface border border-slate-700/80 max-w-sm w-full rounded-2xl p-6 text-center shadow-2xl relative overflow-hidden">
         {/* Ambient Top Glow */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-tennis-yellow/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -27,34 +31,44 @@ export const SplashModal: React.FC<SplashModalProps> = ({ onEnterCourt }) => {
         </div>
 
         <h2 className="text-2xl font-bold text-white mb-1">
-          Masuk ke <span className="text-tennis-yellow">Lapangan</span>
+          Selamat Datang di <span className="text-tennis-yellow">AceCoach</span>
         </h2>
-        <p className="text-slate-400 text-xs mb-5">
-          Sentuh tombol di bawah untuk mengaktifkan audio vokal lapangan dan mencegah layar HP mati saat berlatih.
+        <p className="text-slate-300 text-xs mb-5">
+          Asisten & pelatih tenis mandiri di saku Anda untuk berlatih lebih terarah di lapangan maupun di rumah.
         </p>
 
-        <div className="space-y-2.5 text-left bg-tennis-navy/40 border border-slate-800 p-3.5 rounded-xl mb-6 text-xs text-slate-300">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-tennis-yellow shrink-0" />
-            <span>Audio sintetis & vokal aba-aba drill aktif</span>
+        <div className="space-y-3 text-left bg-tennis-navy/50 border border-slate-800 p-3.5 rounded-xl mb-6 text-xs text-slate-200">
+          <div className="flex items-start gap-2.5">
+            <BookOpen className="w-4 h-4 text-tennis-yellow shrink-0 mt-0.5" />
+            <span><strong>Kurikulum Teknik:</strong> Pelajari grip, ayunan, & servis dengan ilustrasi 3D realistis.</span>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-tennis-yellow shrink-0" />
-            <span>Screen Wake Lock: layar tidak akan mati di bangku</span>
+          <div className="flex items-start gap-2.5">
+            <Volume2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+            <span><strong>Pelatih Suara di Lapangan:</strong> HP memberi aba-aba vokal tempo otomatis saat drill.</span>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-tennis-yellow shrink-0" />
-            <span>100% Offline PWA & Zero-Server data lokal</span>
+          <div className="flex items-start gap-2.5">
+            <Camera className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+            <span><strong>Kamera Cermin Gerakan:</strong> Cocokkan pose ayunan Anda dengan standar petenis pro.</span>
           </div>
         </div>
 
-        <button
-          onClick={handleStart}
-          className="w-full min-h-[52px] bg-tennis-yellow text-tennis-dark font-bold text-base rounded-xl flex items-center justify-center gap-2 hover:bg-tennis-yellowDark transition-all court-glow-yellow active:scale-95"
-        >
-          <Play className="w-5 h-5 fill-current" />
-          <span>Mulai Latihan (Enter Court)</span>
-        </button>
+        <div className="space-y-2.5">
+          <button
+            onClick={() => handleStart(false)}
+            className="w-full min-h-[50px] bg-tennis-yellow text-tennis-dark font-bold text-sm rounded-xl flex items-center justify-center gap-2 hover:bg-tennis-yellowDark transition-all court-glow-yellow active:scale-95"
+          >
+            <Play className="w-4 h-4 fill-current" />
+            <span>Masuk ke Lapangan 🎾</span>
+          </button>
+
+          <button
+            onClick={() => handleStart(true)}
+            className="w-full py-2.5 px-3 rounded-xl border border-slate-700 hover:border-tennis-yellow/60 text-slate-300 hover:text-tennis-yellow text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-slate-900/50"
+          >
+            <HelpCircle className="w-4 h-4 text-tennis-yellow" />
+            <span>Baru Pertama Kali? Baca Panduan (1 Menit)</span>
+          </button>
+        </div>
       </div>
     </div>
   );

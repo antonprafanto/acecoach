@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { BottomNav, ActiveTab } from './components/BottomNav';
 import { SplashModal } from './components/SplashModal';
 import { NTRPModal } from './components/NTRPModal';
+import { UserGuideModal } from './components/UserGuideModal';
 import { CurriculumTab } from './components/CurriculumTab';
 import { BiomechanicsTab } from './components/BiomechanicsTab';
 import { DrillsTab } from './components/DrillsTab';
@@ -30,6 +31,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('curriculum');
   const [showSplash, setShowSplash] = useState<boolean>(true);
   const [showNTRPModal, setShowNTRPModal] = useState<boolean>(false);
+  const [showGuideModal, setShowGuideModal] = useState<boolean>(false);
   const [wakeLockActive, setWakeLockActive] = useState<boolean>(false);
 
   // Sync state changes to storage
@@ -102,9 +104,8 @@ export default function App() {
         wakeLockActive={wakeLockActive}
         onToggleWakeLock={handleToggleWakeLock}
         onOpenNTRPQuiz={() => setShowNTRPModal(true)}
+        onOpenGuide={() => setShowGuideModal(true)}
       />
-
-
 
       {/* 2. Main Content Viewport */}
       <main className="flex-1 max-w-4xl w-full mx-auto p-4 md:p-6">
@@ -114,6 +115,7 @@ export default function App() {
             completedLessons={completedLessons}
             onToggleLesson={handleToggleLesson}
             onUpdateProfile={handleUpdateProfile}
+            onOpenGuide={() => setShowGuideModal(true)}
           />
         )}
 
@@ -172,6 +174,17 @@ export default function App() {
           onEnterCourt={() => {
             setShowSplash(false);
             setWakeLockActive(true);
+          }}
+          onOpenGuide={() => setShowGuideModal(true)}
+        />
+      )}
+
+      {showGuideModal && (
+        <UserGuideModal
+          onClose={() => setShowGuideModal(false)}
+          onNavigateTab={(tab) => {
+            setActiveTab(tab);
+            setShowGuideModal(false);
           }}
         />
       )}

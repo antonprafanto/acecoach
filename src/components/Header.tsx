@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sun, Moon, Volume2, VolumeX, Eye, Flame, Compass, Heart } from 'lucide-react';
+import { Shield, Sun, Moon, Volume2, VolumeX, Eye, Flame, Compass, Heart, HelpCircle } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -8,6 +8,7 @@ interface HeaderProps {
   wakeLockActive: boolean;
   onToggleWakeLock: () => void;
   onOpenNTRPQuiz: () => void;
+  onOpenGuide: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
   wakeLockActive,
   onToggleWakeLock,
   onOpenNTRPQuiz,
+  onOpenGuide,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-tennis-navy/95 backdrop-blur border-b border-slate-800 px-4 py-3">
@@ -42,13 +44,23 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Quick Action Toggles */}
         <div className="flex items-center gap-2">
+          {/* User Guide Button */}
+          <button
+            onClick={onOpenGuide}
+            title="Panduan Cara Pakai Aplikasi"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-tennis-yellow/15 border border-tennis-yellow/40 text-xs text-tennis-yellow hover:bg-tennis-yellow hover:text-tennis-dark transition-all font-bold"
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Panduan</span>
+          </button>
+
           {/* NTRP Level Badge (Clickable for diagnostic quiz) */}
           <button
             onClick={onOpenNTRPQuiz}
             title="Klik untuk Kuis Diagnostik NTRP"
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-tennis-surface border border-slate-700 text-xs text-tennis-yellow hover:border-tennis-yellow transition-colors"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-tennis-surface border border-slate-700 text-xs text-slate-300 hover:border-tennis-yellow transition-colors"
           >
-            <Compass className="w-3.5 h-3.5" />
+            <Compass className="w-3.5 h-3.5 text-tennis-yellow" />
             <span className="font-bold">NTRP {profile.ntrpLevel}</span>
           </button>
 

@@ -13,7 +13,9 @@ import {
   RotateCcw,
   ChevronDown,
   ChevronUp,
-  Image as ImageIcon
+  Image as ImageIcon,
+  X,
+  HelpCircle,
 } from 'lucide-react';
 import { CURRICULUM_DATA } from '../data/curriculumData';
 import { DYNAMIC_WARMUP, GEAR_SANITY_GUIDE } from '../data/prehabData';
@@ -26,6 +28,7 @@ interface CurriculumTabProps {
   completedLessons: string[];
   onToggleLesson: (lessonId: string) => void;
   onUpdateProfile: (updated: Partial<UserProfile>) => void;
+  onOpenGuide?: () => void;
 }
 
 export const CurriculumTab: React.FC<CurriculumTabProps> = ({
@@ -33,6 +36,7 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
   completedLessons,
   onToggleLesson,
   onUpdateProfile,
+  onOpenGuide,
 }) => {
   const [subView, setSubView] = useState<'curriculum' | 'prehab'>('curriculum');
   const [activeLevel, setActiveLevel] = useState<'beginner' | 'intermediate'>(
@@ -40,6 +44,9 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
   );
   const [selectedContextFilter, setSelectedContextFilter] = useState<string>('All');
   const [expandedLessonId, setExpandedLessonId] = useState<string | null>('b_w1_grip'); // Default expand week 1 so diagram is visible immediately!
+  const [dismissBanner, setDismissBanner] = useState<boolean>(() => {
+    return localStorage.getItem('acecoach_dismiss_quickstart') === 'true';
+  });
 
   // Warmup Timer State
   const [activeWarmupIndex, setActiveWarmupIndex] = useState<number | null>(null);
@@ -127,6 +134,61 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
 
       {subView === 'curriculum' ? (
         <>
+          {/* Quick Start Guidance Banner for New Users */}
+          {!dismissBanner && (
+            <div className="bg-gradient-to-br from-tennis-navy via-[#0d2238] to-tennis-surface border border-tennis-yellow/40 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+              <button
+                onClick={() => {
+                  localStorage.setItem('acecoach_dismiss_quickstart', 'true');
+                  setDismissBanner(true);
+                }}
+                className="absolute top-3 right-3 p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800/80 transition-colors"
+                title="Tutup panduan ini"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-start gap-3 pr-6">
+                <div className="p-2 rounded-xl bg-tennis-yellow/15 text-tennis-yellow border border-tennis-yellow/30 shrink-0 mt-0.5">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] uppercase font-bold tracking-wider bg-tennis-yellow/20 text-tennis-yellow px-2 py-0.5 rounded border border-tennis-yellow/30">
+                      Mulai Dari Sini
+                    </span>
+                    <h3 className="text-sm font-bold text-white">
+                      Baru Pertama Kali di AceCoach?
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-200 leading-relaxed">
+                    Mulai latihan dari <strong>Modul 1: Grip & Siap Bentur</strong> di bawah. Klik modulnya untuk melihat ilustrasi 3D posisi raket, baca tips kuncinya, lalu klik <em>"Tandai Modul Selesai"</em> jika sudah dipraktikkan!
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                    {onOpenGuide && (
+                      <button
+                        onClick={onOpenGuide}
+                        className="px-3 py-1.5 rounded-lg bg-tennis-yellow text-tennis-dark font-bold text-xs hover:bg-tennis-yellowDark transition-all flex items-center gap-1 shadow-md shadow-tennis-yellow/10"
+                      >
+                        <HelpCircle className="w-3.5 h-3.5" />
+                        <span>Panduan Cara Pakai (1 Menit)</span>
+                      </button>
+                    )}
+                    <button
+                      onClick={() => {
+                        localStorage.setItem('acecoach_dismiss_quickstart', 'true');
+                        setDismissBanner(true);
+                      }}
+                      className="px-3 py-1.5 rounded-lg text-xs text-slate-400 hover:text-slate-200 border border-slate-700/60 transition-colors"
+                    >
+                      Saya Sudah Paham
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Level Switcher & Progress Header */}
           <div className="bg-tennis-surface border border-slate-800 rounded-2xl p-4 space-y-3">
             <div className="flex items-center justify-between">

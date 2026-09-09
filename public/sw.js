@@ -1,6 +1,6 @@
-// AceCoach Tennis PWA Service Worker v1.5.0
+// AceCoach Tennis PWA Service Worker v1.6.0
 // Network-First for Navigation (HTML) & Cache-First for Offline Fallback
-const CACHE_NAME = 'acecoach-v1-5-0';
+const CACHE_NAME = 'acecoach-v1-6-0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
