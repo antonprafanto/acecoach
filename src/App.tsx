@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { MessageCircle, Heart } from 'lucide-react';
+import { MessageCircle, Heart, HelpCircle } from 'lucide-react';
 import { Header } from './components/Header';
 import { BottomNav, ActiveTab } from './components/BottomNav';
 import { SplashModal } from './components/SplashModal';
@@ -143,6 +143,14 @@ export default function App() {
           <span className="text-slate-400 font-semibold">Anton Prafanto</span>
         </p>
         <div className="flex items-center justify-center gap-3 mt-1.5 text-[10px] text-slate-500">
+          <button
+            onClick={() => setShowGuideModal(true)}
+            className="hover:text-tennis-yellow transition-colors flex items-center gap-1 text-tennis-yellow/90 font-medium"
+          >
+            <HelpCircle className="w-3 h-3 text-tennis-yellow" />
+            <span>Panduan Cara Pakai</span>
+          </button>
+          <span className="text-slate-700">•</span>
           <a
             href="https://wa.me/62811553393?text=Halo%20Mas%20Anton,%20saya%20ingin%20memberi%20saran%20untuk%20AceCoach:"
             target="_blank"

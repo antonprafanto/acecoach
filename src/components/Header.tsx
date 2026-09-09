@@ -43,15 +43,15 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Quick Action Toggles */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* User Guide Button */}
           <button
             onClick={onOpenGuide}
             title="Panduan Cara Pakai Aplikasi"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-tennis-yellow/15 border border-tennis-yellow/40 text-xs text-tennis-yellow hover:bg-tennis-yellow hover:text-tennis-dark transition-all font-bold"
+            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-tennis-yellow/15 border border-tennis-yellow/40 text-xs text-tennis-yellow hover:bg-tennis-yellow hover:text-tennis-dark transition-all font-bold"
           >
             <HelpCircle className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Panduan</span>
+            <span className="text-[11px]">Panduan</span>
           </button>
 
           {/* NTRP Level Badge (Clickable for diagnostic quiz) */}
