@@ -11,11 +11,15 @@ import {
   Sparkles,
   Play,
   RotateCcw,
+  ChevronDown,
+  ChevronUp,
+  Image as ImageIcon
 } from 'lucide-react';
 import { CURRICULUM_DATA } from '../data/curriculumData';
 import { DYNAMIC_WARMUP, GEAR_SANITY_GUIDE } from '../data/prehabData';
 import { UserProfile, CurriculumLesson, DrillContext } from '../types';
 import { playBeep } from '../utils/audioEngine';
+import { LessonIllustration } from './LessonIllustration';
 
 interface CurriculumTabProps {
   profile: UserProfile;
@@ -35,7 +39,7 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
     parseFloat(profile.ntrpLevel) <= 2.5 ? 'beginner' : 'intermediate'
   );
   const [selectedContextFilter, setSelectedContextFilter] = useState<string>('All');
-  const [expandedLessonId, setExpandedLessonId] = useState<string | null>(null);
+  const [expandedLessonId, setExpandedLessonId] = useState<string | null>('b_w1_grip'); // Default expand week 1 so diagram is visible immediately!
 
   // Warmup Timer State
   const [activeWarmupIndex, setActiveWarmupIndex] = useState<number | null>(null);
@@ -107,7 +111,7 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
               : 'text-slate-400 hover:text-white'
           }`}
         >
-          🎓 Kurikulum Latihan
+          🎓 Kurikulum & Diagram Latihan
         </button>
         <button
           onClick={() => setSubView('prehab')}
@@ -117,7 +121,7 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
               : 'text-slate-400 hover:text-white'
           }`}
         >
-          🧘 Pre-Hab & Gear Sanity
+          🧘 Pre-Hab & Panduan Raket
         </button>
       </div>
 
@@ -241,25 +245,38 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
                         >
                           [{lesson.context}]
                         </span>
+                        <span className="text-[10px] bg-tennis-yellow/10 text-tennis-yellow border border-tennis-yellow/30 px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                          <ImageIcon className="w-3 h-3" /> Diagram Tersedia
+                        </span>
                         <span className="text-[11px] text-slate-400 flex items-center gap-1 ml-auto">
                           <Clock className="w-3 h-3" /> {lesson.durationMinutes}m
                         </span>
                       </div>
 
-                      <h3
-                        className={`text-base font-bold ${
-                          isCompleted ? 'line-through text-slate-400' : 'text-white'
-                        }`}
-                      >
-                        {lesson.title}
-                      </h3>
-                      <p className="text-xs text-slate-400 mt-0.5">{lesson.subtitle}</p>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3
+                            className={`text-base font-bold ${
+                              isCompleted ? 'line-through text-slate-400' : 'text-white'
+                            }`}
+                          >
+                            {lesson.title}
+                          </h3>
+                          <p className="text-xs text-slate-400 mt-0.5">{lesson.subtitle}</p>
+                        </div>
+                        <div className="text-slate-500 hover:text-tennis-yellow ml-2">
+                          {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Expanded Lesson Details */}
+                  {/* Expanded Lesson Details with Visual Diagrams */}
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-slate-800/80 space-y-3 text-xs">
+                      {/* Interactive Visual Kinematic Illustration */}
+                      <LessonIllustration lessonId={lesson.id} isLefty={profile.handDominance === 'left'} />
+
                       <div className="bg-tennis-navy/40 p-3 rounded-xl border border-slate-800">
                         <span className="font-bold text-tennis-yellow block mb-1">
                           🎯 Sasaran Latihan:
@@ -380,11 +397,28 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
               <h3 className="text-base font-bold text-white">Panduan Peralatan & Pencegahan Cedera</h3>
             </div>
 
-            {/* Index Finger Rule */}
-            <div className="bg-tennis-navy/40 border border-slate-800 p-3.5 rounded-xl space-y-1.5">
+            {/* Index Finger Rule with Visual Diagram */}
+            <div className="bg-tennis-navy/40 border border-slate-800 p-3.5 rounded-xl space-y-2">
               <span className="text-xs font-bold text-tennis-yellow block">
                 📏 {GEAR_SANITY_GUIDE.gripRule.title}
               </span>
+              
+              {/* Visual Diagram of Index Finger Rule */}
+              <div className="bg-[#070D18] p-3 rounded-xl border border-slate-700/80 flex flex-col items-center">
+                <svg viewBox="0 0 200 90" className="w-52 h-24">
+                  {/* Racquet Handle Cross-section */}
+                  <rect x="20" y="25" width="60" height="40" rx="6" fill="#1E293B" stroke="#CCFF00" strokeWidth="2" />
+                  <text x="50" y="48" fill="#CBD5E1" fontSize="9" textAnchor="middle">Grip Raket</text>
+                  {/* Fingers Wrapped */}
+                  <path d="M 80 25 Q 120 20 120 45 Q 120 70 80 65" fill="none" stroke="#60A5FA" strokeWidth="6" strokeLinecap="round" />
+                  {/* Index Finger in the Gap */}
+                  <rect x="90" y="32" width="16" height="26" rx="4" fill="#CCFF00" stroke="#FFFFFF" strokeWidth="1.5" />
+                  <text x="98" y="48" fill="#0B0F19" fontSize="8" fontWeight="extrabold" textAnchor="middle">1 Jari</text>
+                  <line x1="98" y1="12" x2="98" y2="28" stroke="#CCFF00" strokeWidth="1.5" />
+                  <text x="98" y="10" fill="#CCFF00" fontSize="8" fontWeight="bold" textAnchor="middle">Celah Pas 1 Telunjuk</text>
+                </svg>
+              </div>
+
               <p className="text-xs text-slate-300 leading-relaxed">
                 {GEAR_SANITY_GUIDE.gripRule.description}
               </p>
