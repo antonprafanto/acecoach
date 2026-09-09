@@ -34,7 +34,9 @@ export const Header: React.FC<HeaderProps> = ({
                 PTR v1.2
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium">Modern Tennis Biomechanics</p>
+            <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium">
+              Modern Tennis Biomechanics <span className="text-slate-500">• by Anton Prafanto</span>
+            </p>
           </div>
         </div>
 

@@ -554,13 +554,13 @@ export const DiagnosticsLogTab: React.FC<DiagnosticsLogTabProps> = ({
         </div>
 
         <p className="text-xs text-slate-300 leading-relaxed">
-          AceCoach dikembangkan secara independen dengan dedikasi penuh untuk kemajuan petenis Indonesia. Setiap masukan, kritik, maupun donasi dari Anda sangat berarti untuk kelanjutan pengembangan aplikasi ini! 🎾
+          AceCoach dikembangkan oleh <strong className="text-white font-semibold">Anton Prafanto</strong> secara independen dengan dedikasi penuh untuk kemajuan petenis Indonesia. Setiap masukan, kritik, maupun apresiasi dari Anda sangat berarti untuk kelanjutan pengembangan aplikasi ini! 🎾
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
           {/* WhatsApp Developer */}
           <a
-            href="https://wa.me/62811553393?text=Halo%20Developer%20AceCoach,%20saya%20ingin%20memberi%20saran%20dan%20kritik:"
+            href="https://wa.me/62811553393?text=Halo%20Mas%20Anton,%20saya%20ingin%20memberi%20saran%20dan%20kritik%20untuk%20AceCoach:"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3.5 bg-emerald-950/40 border border-emerald-600/50 hover:border-emerald-400 rounded-xl flex items-center justify-between text-emerald-300 hover:text-emerald-100 transition-all group"
@@ -570,8 +570,8 @@ export const DiagnosticsLogTab: React.FC<DiagnosticsLogTabProps> = ({
                 <MessageCircle className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs font-bold block text-white">WhatsApp Pengembang</span>
-                <span className="text-[11px] text-emerald-400/90 font-medium">0811-553-393 (Chat Langsung)</span>
+                <span className="text-xs font-bold block text-white">WhatsApp Anton Prafanto</span>
+                <span className="text-[11px] text-emerald-400/90 font-medium">0811-553-393 (Pengembang)</span>
               </div>
             </div>
             <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
