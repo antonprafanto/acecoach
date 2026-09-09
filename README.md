@@ -3,7 +3,7 @@
 > **Standard PTR & USPTA Coaching • Modern Biomechanics Specialist**  
 > Aplikasi Web Program Latihan Tenis Mandiri untuk Pemula & Menengah (Offline-First PWA di GitHub Pages).
 
-[![Deploy AceCoach to GitHub Pages](https://github.com/USERNAME/aplikasitenis/actions/workflows/deploy.yml/badge.svg)](https://github.com/USERNAME/aplikasitenis/actions/workflows/deploy.yml)
+[![Deploy AceCoach to GitHub Pages](https://github.com/antonprafanto/acecoach/actions/workflows/deploy.yml/badge.svg)](https://github.com/antonprafanto/acecoach/actions/workflows/deploy.yml)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
@@ -16,7 +16,11 @@
 Banyak pemain tenis rekreasional terjebak dalam **mitos mekanika klasik** (menarik raket lurus, memukul di samping badan, atau mencentong bola dengan lengan) yang memicu cedera *tennis elbow* dan membatasi kekuatan pukulan. 
 
 **AceCoach** dirancang sebagai asisten saku digital (*on-court companion*) yang mengajarkan efisiensi **Rantai Kinetik (*Kinetic Chain*)**:
-$$\text{Ground Force} \rightarrow \text{Putaran Pinggul} \rightarrow \text{Separasi Dada/Bahu} \rightarrow \text{Lengan Rileks} \rightarrow \text{Racket Lag \& Snap} \rightarrow \text{Follow-through}$$
+
+```
+⚡ ALUR RANTAI KINETIK MODERN:
+Ground Force (Kaki) ➔ Putaran Pinggul ➔ Separasi Dada/Bahu ➔ Lengan Rileks ➔ Racket Lag & Snap ➔ Follow-Through
+```
 
 ---
 
@@ -60,8 +64,8 @@ Pastikan Anda telah menginstal **Node.js (v18+)** dan **npm**:
 
 ```bash
 # 1. Clone repositori
-git clone https://github.com/USERNAME/aplikasitenis.git
-cd aplikasitenis
+git clone https://github.com/antonprafanto/acecoach.git
+cd acecoach
 
 # 2. Install dependencies
 npm install
@@ -78,23 +82,15 @@ npm run preview
 
 ---
 
-## 🌐 Cara Publikasi ke GitHub Pages (1-Click Automated CI/CD)
+## 🌐 Publikasi ke GitHub Pages (Automated CI/CD)
 
-Proyek ini telah dilengkapi dengan GitHub Actions workflow `.github/workflows/deploy.yml`.
+Proyek ini telah dilengkapi dengan workflow GitHub Actions `.github/workflows/deploy.yml`.
 
-1. Buat repository baru di GitHub: `https://github.com/new`
-2. Hubungkan dan push kode:
-   ```bash
-   git remote add origin https://github.com/USERNAME/aplikasitenis.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. Buka repositori di browser $\rightarrow$ klik **Settings** $\rightarrow$ **Pages**.
-4. Di bagian **Build and deployment > Source**, pilih **GitHub Actions**.
-5. Tunggu 1–2 menit, web app Anda akan aktif di:
-   ```
-   https://USERNAME.github.io/aplikasitenis/
-   ```
+1. Buka repositori Anda di browser:  
+   👉 [https://github.com/antonprafanto/acecoach/settings/pages](https://github.com/antonprafanto/acecoach/settings/pages)
+2. Di bagian **Build and deployment > Source**, pilih **GitHub Actions**.
+3. Tunggu 1–2 menit, web app Anda akan aktif di:  
+   👉 **[https://antonprafanto.github.io/acecoach/](https://antonprafanto.github.io/acecoach/)**
 
 ---
 
