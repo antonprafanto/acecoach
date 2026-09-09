@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A192F" />
+    
+    <!-- SEO & OpenGraph Social Sharing Metadata (WhatsApp, Telegram, Twitter Preview) -->
+    <title>AceCoach — Modern Tennis Pathway & Biomechanics</title>
+    <meta name="description" content="Program latihan tenis mandiri berstandar PTR/USPTA dan biomekanik modern. Dilengkapi Split-Step Pacer, HIIT Shadow Timer, Cermin Kamera Feel vs Real, dan Panduan Anti-Tennis Elbow." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AceCoach — Modern Tennis Pathway" />
+    <meta property="og:description" content="Asisten latihan tenis saku berstandar dunia (PTR/USPTA). Optimasi rantai kinetik, drill audio outdoor, dan bebas cedera." />
+    <meta property="og:image" content="./icon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="AceCoach — Modern Tennis Pathway" />
+    <meta name="twitter:description" content="Program latihan tenis mandiri berstandar PTR/USPTA dan biomekanik modern." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AceCoach" />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <script type="module" crossorigin src="./assets/index-BiRz8EFt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DXmKQViC.css">
+  </head>
+  <body class="bg-tennis-dark text-slate-100 antialiased selection:bg-tennis-yellow selection:text-tennis-dark min-h-screen">
+    <div id="root"></div>
+    <script>
+      // Register Service Worker for offline PWA capabilities on court
+      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').then((reg) => {
+            reg.update();
+            console.log('AceCoach ServiceWorker registered:', reg.scope);
+          }).catch((err) => {
+            console.log('AceCoach ServiceWorker registration failed:', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

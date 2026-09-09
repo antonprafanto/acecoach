@@ -1,0 +1,19 @@
+{
+  "name": "AceCoach — Modern Tennis Pathway",
+  "short_name": "AceCoach",
+  "description": "Program latihan tenis mandiri berstandar PTR/USPTA dan biomekanik modern",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B0F19",
+  "theme_color": "#0A192F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
