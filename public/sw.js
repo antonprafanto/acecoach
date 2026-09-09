@@ -1,6 +1,6 @@
-// AceCoach Tennis PWA Service Worker v1.4.0
+// AceCoach Tennis PWA Service Worker v1.5.0
 // Network-First for Navigation (HTML) & Cache-First for Offline Fallback
-const CACHE_NAME = 'acecoach-v1-4-0';
+const CACHE_NAME = 'acecoach-v1-5-0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -18,7 +18,11 @@ const ASSETS_TO_CACHE = [
   './illustrations/i_w2_racket_lag_snap.jpg',
   './illustrations/i_w4_serve_pronation.jpg',
   './illustrations/i_w6_matchplay_tactics.jpg',
-  './illustrations/index_finger_grip.jpg'
+  './illustrations/index_finger_grip.jpg',
+  './illustrations/biomechanics_phase_1_unit_turn.jpg',
+  './illustrations/biomechanics_phase_2_drop_lag.jpg',
+  './illustrations/biomechanics_phase_3_contact.jpg',
+  './illustrations/biomechanics_phase_4_finish.jpg'
 ];
 
 self.addEventListener('install', (event) => {

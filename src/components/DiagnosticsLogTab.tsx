@@ -13,7 +13,11 @@ import {
   Trash2,
   FileJson,
   Search,
-  Zap
+  Zap,
+  Heart,
+  Coffee,
+  MessageCircle,
+  ExternalLink
 } from 'lucide-react';
 import { FAULT_DIAGNOSTICS } from '../data/diagnosticsData';
 import { PracticeLog, UserProfile } from '../types';
@@ -536,6 +540,63 @@ export const DiagnosticsLogTab: React.FC<DiagnosticsLogTabProps> = ({
           )}
         </div>
       )}
+
+      {/* Developer Contact & Community Support Card */}
+      <div className="bg-gradient-to-br from-tennis-surface to-[#070D18] border border-slate-700/80 rounded-2xl p-5 space-y-4 shadow-xl mt-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-tennis-yellow/15 border border-tennis-yellow/30 text-tennis-yellow">
+            <Heart className="w-5 h-5 fill-tennis-yellow" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">Hubungi Pengembang & Dukung AceCoach</h3>
+            <p className="text-[11px] text-slate-400">Punya saran, kritik, ide fitur, atau ingin memberi apresiasi?</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-slate-300 leading-relaxed">
+          AceCoach dikembangkan secara independen dengan dedikasi penuh untuk kemajuan petenis Indonesia. Setiap masukan, kritik, maupun donasi dari Anda sangat berarti untuk kelanjutan pengembangan aplikasi ini! 🎾
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          {/* WhatsApp Developer */}
+          <a
+            href="https://wa.me/62811553393?text=Halo%20Developer%20AceCoach,%20saya%20ingin%20memberi%20saran%20dan%20kritik:"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 bg-emerald-950/40 border border-emerald-600/50 hover:border-emerald-400 rounded-xl flex items-center justify-between text-emerald-300 hover:text-emerald-100 transition-all group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-emerald-900/60 text-emerald-400">
+                <MessageCircle className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs font-bold block text-white">WhatsApp Pengembang</span>
+                <span className="text-[11px] text-emerald-400/90 font-medium">0811-553-393 (Chat Langsung)</span>
+              </div>
+            </div>
+            <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+          </a>
+
+          {/* Trakteer Donation */}
+          <a
+            href="https://trakteer.id/limitless7/tip"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 bg-red-950/40 border border-red-600/50 hover:border-red-400 rounded-xl flex items-center justify-between text-red-300 hover:text-red-100 transition-all group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-red-900/60 text-red-400">
+                <Coffee className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs font-bold block text-white">Donasi via Trakteer</span>
+                <span className="text-[11px] text-red-400/90 font-medium">trakteer.id/limitless7/tip</span>
+              </div>
+            </div>
+            <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

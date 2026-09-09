@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sun, Moon, Volume2, VolumeX, Eye, Flame, Compass } from 'lucide-react';
+import { Shield, Sun, Moon, Volume2, VolumeX, Eye, Flame, Compass, Heart } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface HeaderProps {
@@ -83,6 +83,18 @@ export const Header: React.FC<HeaderProps> = ({
               <VolumeX className="w-4 h-4" />
             )}
           </button>
+
+          {/* Support Developer & Tip */}
+          <a
+            href="https://trakteer.id/limitless7/tip"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Dukung Pengembang di Trakteer (Saran & Donasi)"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-950/40 border border-red-800 text-xs text-red-300 hover:bg-red-900/60 hover:text-white transition-colors"
+          >
+            <Heart className="w-3.5 h-3.5 fill-red-400 text-red-400" />
+            <span className="hidden md:inline font-semibold text-[11px]">Dukung</span>
+          </a>
         </div>
       </div>
     </header>

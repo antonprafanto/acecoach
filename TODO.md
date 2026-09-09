@@ -108,14 +108,17 @@
 ## 🧬 Fase 6: Interactive Biomechanics & Camera Mirror
 *Membedah rantai kinetik dan memecahkan ilusi "Feel vs. Real".*
 
-- [x] **6.1 Checkpoint Viewer 4-Fase:**
-  - Fase 1: Unit Turn & Coiling
-  - Fase 2: The Drop & Racket Lag
-  - Fase 3: Contact Point 30–45 cm di depan tubuh
-  - Fase 4: Extension & Follow-through
+- [x] **6.1 Checkpoint Viewer 4-Fase & Ilustrasi 3D Biomekanik:**
+  - Integrasi 4 gambar 3D fotorealistik syari'at compliant (*faceless mannequin*, celana & lengan panjang):
+    - Fase 1: Unit Turn & Coiling (`biomechanics_phase_1_unit_turn.jpg`)
+    - Fase 2: The Drop & Racket Lag (`biomechanics_phase_2_drop_lag.jpg`)
+    - Fase 3: Contact Point 30–45 cm di depan tubuh (`biomechanics_phase_3_contact.jpg`)
+    - Fase 4: Extension & Windshield Wiper Finish (`biomechanics_phase_4_finish.jpg`)
+  - Tombol interaktif **Lightbox Zoom Modal** untuk memperbesar detail sudut biomekanik ke layar penuh.
+  - Fallback otomatis ke diagram SVG kinematik jika gambar belum termuat.
 - [x] **6.2 Toggle "Mitos Klasik vs Realita Modern":** Komparasi interaktif membedah mitos usang vs teknik modern efisien.
 - [x] **6.3 In-App Camera Mirror (WebRTC):**
-  - Kamera selfie real-time tepat di samping diagram anatomi.
+  - Kamera selfie real-time tepat di samping diagram anatomi dengan callback ref langsung (`el.srcObject = stream`) untuk mencegah layar hitam.
   - *Visual Grid Overlay:* Garis bantu vertikal dan horizontal untuk memeriksa posisi kepala, tekukan lutut, dan titik jangkauan raket.
   - Fallback Error Boundary jika kamera ditolak atau tidak tersedia.
   - Jaminan privasi 100% lokal (zero-upload).
@@ -177,3 +180,4 @@
 - [x] **10.3 Offline PWA Assets:** Service worker `public/sw.js` dan `manifest.webmanifest` terpasang.
 - [x] **10.4 Production Build & Zero-Lint Check:** `npm run build` berhasil 100% tanpa error (bundle gzip JS 82 kB, CSS 5.7 kB).
 - [x] **10.5 Deployment GitHub Pages:** Berhasil di-push ke branch `main` repositori `https://github.com/antonprafanto/acecoach`.
+- [x] **10.6 Developer Contact & Community Support:** Integrasi tautan langsung WhatsApp pengembang (0811-553-393) dan halaman donasi/tip Trakteer (https://trakteer.id/limitless7/tip) di header dan tab profil/pengaturan.
