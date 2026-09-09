@@ -115,7 +115,7 @@ $$\text{Shadow Swings (No Ball)} \rightarrow \text{Self/Hand Feed} \rightarrow \
 
 ### Modul 2: Progressive Pathway Curriculum (Kurikulum Terstruktur)
 
-Tiap latihan dilengkapi tag sarana: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder / Ball Machine]`, `[Live Rally]`, serta **Diagram Kinematik Vektor SVG Interaktif** (`LessonIllustration.tsx`) yang dapat di-expand dengan perspektif standar industri tenis universal.
+Tiap latihan dilengkapi tag sarana: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder / Ball Machine]`, `[Live Rally]`, serta **Ilustrasi 3D Biomekanik Syar'i** (`LessonIllustration.tsx`) yang faceless, menutup aurat, dilengkapi tombol Lightbox Zoom modal interaktif, dan kunci instruksi biomekanik PTR.
 
 #### Jalur Pemula: 4-Week Foundation Track
 * **Minggu 1: Fondasi Pegangan & Titik Kontak (Grip & Contact Point)**

@@ -403,20 +403,16 @@ export const CurriculumTab: React.FC<CurriculumTabProps> = ({
                 📏 {GEAR_SANITY_GUIDE.gripRule.title}
               </span>
               
-              {/* Visual Diagram of Index Finger Rule */}
+              {/* Visual 3D Diagram of Index Finger Rule */}
               <div className="bg-[#070D18] p-3 rounded-xl border border-slate-700/80 flex flex-col items-center">
-                <svg viewBox="0 0 200 90" className="w-52 h-24">
-                  {/* Racquet Handle Cross-section */}
-                  <rect x="20" y="25" width="60" height="40" rx="6" fill="#1E293B" stroke="#CCFF00" strokeWidth="2" />
-                  <text x="50" y="48" fill="#CBD5E1" fontSize="9" textAnchor="middle">Grip Raket</text>
-                  {/* Fingers Wrapped */}
-                  <path d="M 80 25 Q 120 20 120 45 Q 120 70 80 65" fill="none" stroke="#60A5FA" strokeWidth="6" strokeLinecap="round" />
-                  {/* Index Finger in the Gap */}
-                  <rect x="90" y="32" width="16" height="26" rx="4" fill="#CCFF00" stroke="#FFFFFF" strokeWidth="1.5" />
-                  <text x="98" y="48" fill="#0B0F19" fontSize="8" fontWeight="extrabold" textAnchor="middle">1 Jari</text>
-                  <line x1="98" y1="12" x2="98" y2="28" stroke="#CCFF00" strokeWidth="1.5" />
-                  <text x="98" y="10" fill="#CCFF00" fontSize="8" fontWeight="bold" textAnchor="middle">Celah Pas 1 Telunjuk</text>
-                </svg>
+                <img
+                  src="./illustrations/index_finger_grip.jpg"
+                  alt="Uji Celah 1 Jari Telunjuk Ukuran Grip Raket"
+                  className="w-full max-w-md aspect-video object-contain rounded-lg shadow-lg"
+                />
+                <span className="text-[10px] text-tennis-yellow font-bold uppercase tracking-wider mt-2">
+                  Uji Celah 1 Jari Telunjuk: Pas Tanpa Longgar & Tanpa Menjepit
+                </span>
               </div>
 
               <p className="text-xs text-slate-300 leading-relaxed">

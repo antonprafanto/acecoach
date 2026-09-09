@@ -85,21 +85,23 @@
   - Minggu 6: Taktik Matchplay (Cross-court percentage & Serve + 1).
 - [x] **5.3 Penanda Konteks Sarana:** Label pada setiap drill: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder]`, atau `[Live Rally]`.
 - [x] **5.4 Interactive Progress Tracking:** Checkbox checklist dengan persentase bar visual yang tersimpan otomatis di LocalStorage.
-- [x] **5.5 Diagram Kinematik & Ilustrasi Visual Vektor (`src/components/LessonIllustration.tsx`):**
-  - Diagram visual butt-cap 8-bevel raket (Continental, Eastern, Semi-Western).
-  - Diagram geometri titik bentur (Contact Point) 30-45 cm di depan pinggul vs zona bahaya siku.
-  - Diagram animasi dinamika pegas Split-Step (Ready -> Hop -> React).
-  - Diagram rotasi Unit Turn bahu 90° dengan tangan non-dominan di leher raket.
-  - Diagram lintasan Low-to-High dan Racket Drop forehand topspin.
-  - Diagram mekanika Backhand 2HBH (tangan non-dominan pendorong utama).
-  - Diagram Servis Trophy Pose sudut 90° siku sejajar bahu & ball toss di jam 1.
-  - Diagram Punch Volley (racket head above wrist, no backswing block).
-  - Diagram Open Stance loading phase (80% tumpuan kaki luar).
-  - Diagram Racket Lag & Snap (butt-cap leading, pergelangan rileks 3/10).
-  - Diagram Pronasi Servis rotasi internal 90°.
-  - Diagram Geometri Lapangan (keunggulan 70% pukulan crosscourt).
-  - Diagram Index Finger Rule pada raket grip sizing di Prehab.
-  - Desain visual bersih dan konsisten dengan perspektif standar industri tenis.
+- [x] **5.5 Ilustrasi Visual 3D Biomekanik & Panduan Syar'i (`src/components/LessonIllustration.tsx`):**
+  - Integrasi 13 aset gambar 3D fotorealistik berstandar syari'at Islam (*faceless mannequin*, pakaian tertutup sopan menutupi aurat: celana training panjang & baju olahraga lengan panjang).
+  - Foto makro visual butt-cap 8-bevel raket (Continental & Semi-Western).
+  - Analisis 3D titik bentur (Contact Point) 40 cm di depan kaki tumpuan.
+  - Dinamika lompatan pegas Split-Step (Ready -> Hop -> React).
+  - Rotasi Unit Turn bahu 90° dengan pemandu tangan non-dominan di leher raket.
+  - Lintasan Low-to-High dan gravitasi Racket Drop forehand topspin.
+  - Fondasi Backhand 2 Tangan (tangan non-dominan sebagai pendorong utama).
+  - Servis Trophy Pose sudut siku 90° sejajar bahu & ball toss di jam 1.
+  - Punch Volley di net (racket head above wrist & tanpa ayunan belakang).
+  - Open Stance loading phase (80% tumpuan kaki luar meledak ke atas).
+  - Racket Lag & Snap (cambukan kepala raket dengan pergelangan rileks).
+  - Pronasi Servis rotasi internal 90° memutar permukaan senar raket.
+  - Taktik Lapangan Crosscourt (keunggulan 70% persentase tenis).
+  - Foto uji ukuran grip raket (*The Index Finger Rule*) di modul Pre-Hab.
+  - Fitur interaktif **Lightbox Modal Zoom** untuk memperbesar detail gambar ke layar penuh.
+  - Caching offline Service Worker v1.4.0 untuk performa kilat di lapangan tanpa kuota internet.
 
 ---
 
