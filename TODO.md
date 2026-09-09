@@ -85,6 +85,21 @@
   - Minggu 6: Taktik Matchplay (Cross-court percentage & Serve + 1).
 - [x] **5.3 Penanda Konteks Sarana:** Label pada setiap drill: `[Solo Shadow]`, `[Wall / Dinding]`, `[Feeder]`, atau `[Live Rally]`.
 - [x] **5.4 Interactive Progress Tracking:** Checkbox checklist dengan persentase bar visual yang tersimpan otomatis di LocalStorage.
+- [x] **5.5 Diagram Kinematik & Ilustrasi Visual Vektor (`src/components/LessonIllustration.tsx`):**
+  - Diagram visual butt-cap 8-bevel raket (Continental, Eastern, Semi-Western).
+  - Diagram geometri titik bentur (Contact Point) 30-45 cm di depan pinggul vs zona bahaya siku.
+  - Diagram animasi dinamika pegas Split-Step (Ready -> Hop -> React).
+  - Diagram rotasi Unit Turn bahu 90° dengan tangan non-dominan di leher raket.
+  - Diagram lintasan Low-to-High dan Racket Drop forehand topspin.
+  - Diagram mekanika Backhand 2HBH (tangan non-dominan pendorong utama).
+  - Diagram Servis Trophy Pose sudut 90° siku sejajar bahu & ball toss di jam 1.
+  - Diagram Punch Volley (racket head above wrist, no backswing block).
+  - Diagram Open Stance loading phase (80% tumpuan kaki luar).
+  - Diagram Racket Lag & Snap (butt-cap leading, pergelangan rileks 3/10).
+  - Diagram Pronasi Servis rotasi internal 90°.
+  - Diagram Geometri Lapangan (keunggulan 70% pukulan crosscourt).
+  - Diagram Index Finger Rule pada raket grip sizing di Prehab.
+  - Dukungan cermin horizontal (`scaleX(-1)`) instan saat mode Kidal aktif.
 
 ---
 
